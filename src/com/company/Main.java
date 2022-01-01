@@ -4,27 +4,55 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Rectangle rectangle = new Rectangle(2,3,5,5, 2, 3);
-        Triangle triangle = new Triangle(2,2,4,5,8,5);
-        Circle circle = new Circle(2,3,6, 2);
+        Vertex[] fourVertices = new Vertex[4];
+        fourVertices[0] = new Vertex(4, 3);
+        fourVertices[1] = new Vertex(5, 6);
+        fourVertices[2] = new Vertex(2, 9);
+        fourVertices[3] = new Vertex(8, 3);
 
-        Cuboid cuboid = new Cuboid(2, 3, 4, 5);
-        Sphere sphere = new Sphere(2,3,4,5);
-        SquarePyramid squarePyramid = new SquarePyramid(2,4,4,6,4,5,3,3);
+        Vertex[] threeVertices = new Vertex[3];
+        threeVertices[0] = new Vertex(2, 3);
+        threeVertices[1] = new Vertex(4, 5);
+        threeVertices[2] = new Vertex(5, 6);
 
-        rectangle.getPerimeter();
-        rectangle.getArea();
+        Vertex[] twoVertices = new Vertex[2];
+        twoVertices[0] = new Vertex(2, 5);
+        twoVertices[1] = new Vertex(4, 6);
+
+        Triangle triangle = new Triangle(threeVertices);
         triangle.getPerimeter();
         triangle.getArea();
+
+        Circle circle = new Circle(twoVertices);
         circle.getPerimeter();
         circle.getArea();
 
+        Rectangle rectangle = new Rectangle(threeVertices);
+        rectangle.getPerimeter();
+        rectangle.getArea();
+
+        Cuboid cuboid = new Cuboid(threeVertices);
         cuboid.getArea();
         cuboid.getVolume();
+
+        Sphere sphere = new Sphere(twoVertices);
         sphere.getArea();
         sphere.getVolume();
+
+        SquarePyramid squarePyramid = new SquarePyramid(fourVertices);
         squarePyramid.getArea();
         squarePyramid.getVolume();
 
+        Shape[] shape = new Shape[6];
+        shape[0] = triangle;
+        shape[1] = circle;
+        shape[2] = rectangle;
+        shape[3] = cuboid;
+        shape[4] = sphere;
+        shape[5] = squarePyramid;
+
+        for (int i = 0; i < shape.length; i++) {
+            System.out.println(shape[i].toString());
+        }
     }
 }

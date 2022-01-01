@@ -2,26 +2,29 @@ package com.company;
 
 public class Sphere extends SpaceShape {
 
-    int xA, xB, yA, yB;
-    double distanceAB, sphereArea, sphereVolume;
+    double sphereArea, sphereVolume;
 
-    public Sphere(int xA, int xB, int yA, int yB) {
-        this.xA = xA;
-        this.xB = xB;
-        this.yA = yA;
-        this.yB = yB;
+    public Sphere(Vertex[] vertices) {
+        super(vertices);
     }
 
     @Override
-    public void getArea() {
-        distanceAB = Math.sqrt(Math.pow((xA - xB), 2) + Math.pow((yA - yB), 2));
-        sphereArea = (4 * 3.14 * Math.pow((distanceAB), 2));
-        System.out.print("Sphere area = " + String.format("%.2f%n", sphereArea));
+    public double getArea() {
+        sphereArea = 4 * Math.PI * Math.pow((distance(getVertices()[0], getVertices()[1])), 2);
+        return sphereArea;
     }
 
     @Override
-    public void getVolume() {
-        sphereVolume = ((4 / 3) * 3.14 * (Math.pow(distanceAB, 3)));
-        System.out.println("Sphere volume = " + String.format("%.2f%n", sphereVolume));
+    public double getVolume() {
+        sphereVolume = (4 * Math.PI * (Math.pow(distance(getVertices()[0], getVertices()[1]), 3))) / 3;
+        return sphereVolume;
+    }
+
+    @Override
+    public String toString() {
+        return "Sphere{" + " A: " + getVertices()[0].toString() + " B: " + getVertices()[1].toString() +
+                " sphereArea=" + String.format("%.2f", sphereArea) +
+                ", sphereVolume=" + String.format("%.2f", sphereVolume) +
+                '}';
     }
 }

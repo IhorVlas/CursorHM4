@@ -1,33 +1,34 @@
 package com.company;
 
-public class SquarePyramid extends SpaceShape{
+public class SquarePyramid extends SpaceShape {
 
-    int xA, xB, xC, xD, yA, yB, yC, yD;
     double distanceAB, distanceBC, distanceAD, pyramidArea, pyramidVolume;
 
-    public SquarePyramid(int xA, int xB, int xC, int xD, int yA, int yB, int yC, int yD) {
-        this.xA = xA;
-        this.xB = xB;
-        this.xC = xC;
-        this.xD = xD;
-        this.yA = yA;
-        this.yB = yB;
-        this.yC = yC;
-        this.yD = yD;
+    public SquarePyramid(Vertex[] vertices) {
+        super(vertices);
     }
 
     @Override
-    public void getArea() {
-        distanceAB = Math.sqrt(Math.pow((xA - xB), 2) + Math.pow((yA - yB), 2));
-        distanceBC = Math.sqrt(Math.pow((xB - xC), 2) + Math.pow((yB - yC), 2));
-        distanceAD = Math.sqrt(Math.pow((xA - xD), 2) + Math.pow((yA - yD), 2));
-        pyramidArea = 2 * distanceBC * Math.sqrt(Math.pow(distanceAB, 2) - (Math.pow(distanceBC, 2)/4));
-        System.out.print("SquarePyramid area = " + String.format("%.2f%n", pyramidArea));
+    public double getArea() {
+        distanceAB = distance(getVertices()[0], getVertices()[1]);
+        distanceBC = distance(getVertices()[1], getVertices()[2]);
+        distanceAD = distance(getVertices()[0], getVertices()[3]);
+        pyramidArea = (Math.pow(distanceBC, 2)) + (2 * distanceBC * Math.sqrt(Math.pow(distanceAB, 2) - (Math.pow(distanceBC, 2) / 4)));
+        return pyramidArea;
     }
 
     @Override
-    public void getVolume() {
-        pyramidVolume = distanceAD/3 * Math.pow(distanceBC, 2);
-        System.out.print("SquarePyramid volume = " + String.format("%.2f%n", pyramidVolume));
+    public double getVolume() {
+        pyramidVolume = distanceAD / 3 * Math.pow(distanceBC, 2);
+        return pyramidVolume;
+    }
+
+    @Override
+    public String toString() {
+        return "SquarePyramid{" + " A: " + getVertices()[0].toString() + " B: " + getVertices()[1].toString() +
+                " C: " + getVertices()[2].toString() + " D: " + getVertices()[3].toString() +
+                " pyramidArea=" + String.format("%.2f", pyramidArea) +
+                ", pyramidVolume=" + String.format("%.2f", pyramidVolume) +
+                '}';
     }
 }

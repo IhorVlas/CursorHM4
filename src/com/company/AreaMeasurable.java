@@ -2,5 +2,5 @@ package com.company;
 
 public interface AreaMeasurable {
 
-    void getArea();
+    double getArea();
 }

@@ -2,29 +2,29 @@ package com.company;
 
 public class Circle extends PlaneShape {
 
-    int xA, xB, yA, yB;
-    double distanceAB;
     double circleLength, circleArea;
 
-    public Circle(int xA, int xB, int yA, int yB) {
-        this.xA = xA;
-        this.xB = xB;
-        this.yA = yA;
-        this.yB = yB;
-
+    public Circle(Vertex[] vertices) {
+        super(vertices);
     }
 
     @Override
-    public void getPerimeter() {
-        distanceAB = Math.sqrt(Math.pow((xA - xB), 2) + Math.pow((yA - yB), 2));
-        circleLength = 2 * 3.14 * distanceAB;
-        System.out.println("Circle: " + "radius = " + String.format("%.2f",distanceAB));
-        System.out.printf("Circle perimeter = " + "%.2f%n", circleLength);
+    public double getPerimeter() {
+        circleLength = 2 * Math.PI * distance(getVertices()[0], getVertices()[1]);
+        return circleLength;
     }
 
     @Override
-    public void getArea() {
-        circleArea = 3.14 * distanceAB * distanceAB;
-        System.out.println("Circle area = " + String.format("%.2f%n", circleArea));
+    public double getArea() {
+        circleArea = Math.PI * Math.pow(distance(getVertices()[0], getVertices()[1]), 2);
+        return circleArea;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle{" + " A: " + getVertices()[0].toString() + " B: " + getVertices()[1].toString() +
+                " circleLength=" + String.format("%.2f", circleLength) +
+                ", circleArea=" + String.format("%.2f", circleArea) +
+                '}';
     }
 }

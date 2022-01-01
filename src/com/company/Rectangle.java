@@ -2,31 +2,30 @@ package com.company;
 
 public class Rectangle extends PlaneShape {
 
-    int xA, xB, xC, yA, yB, yC;
-    double distanceAB, distanceAC;
     double rectanglePerimeter, rectangleArea;
 
-    public Rectangle(int xA, int xB, int xC, int yA, int yB, int yC) {
-        this.xA = xA;
-        this.xB = xB;
-        this.xC = xC;
-        this.yA = yA;
-        this.yB = yB;
-        this.yC = yC;
+    public Rectangle(Vertex[] vertices) {
+        super(vertices);
     }
 
     @Override
-    public void getPerimeter() {
-        distanceAB = Math.sqrt(Math.pow((xA - xB), 2) + Math.pow((yA - yB), 2));
-        distanceAC = Math.sqrt(Math.pow((xA - xC), 2) + Math.pow((yA - yC), 2));
-        rectanglePerimeter = 2 * (distanceAB + distanceAC);
-        System.out.println("Rectangle: width = " + String.format("%.2f",distanceAB) + ", height = " + String.format("%.2f",distanceAC));
-        System.out.println("Rectangle perimeter = " + String.format("%.2f",rectanglePerimeter));
+    public double getPerimeter() {
+        rectanglePerimeter = 2 * (distance(getVertices()[0], getVertices()[1]) + distance(getVertices()[1], getVertices()[2]));
+        return rectanglePerimeter;
     }
 
     @Override
-    public void getArea() {
-        rectangleArea = distanceAB * distanceAC;
-        System.out.println("Rectangle area = " + String.format("%.2f",rectangleArea) + "\n");
+    public double getArea() {
+        rectangleArea = (distance(getVertices()[0], getVertices()[1])) * (distance(getVertices()[1], getVertices()[2]));
+        return rectangleArea;
+    }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" + " A: " + getVertices()[0].toString() + " B: " + getVertices()[1].toString() +
+                " C: " + getVertices()[2].toString() +
+                " rectanglePerimeter=" + String.format("%.2f", rectanglePerimeter) +
+                ", rectangleArea=" + String.format("%.2f", rectangleArea) +
+                '}';
     }
 }

@@ -1,27 +1,30 @@
 package com.company;
 
-public class Cuboid extends SpaceShape{
+public class Cuboid extends SpaceShape {
 
-    int xA, xB, yA, yB;
-    double distanceAB, cuboidArea, cuboidVolume;
+    double cuboidArea, cuboidVolume;
 
-    public Cuboid(int xA, int xB, int yA, int yB) {
-        this.xA = xA;
-        this.xB = xB;
-        this.yA = yA;
-        this.yB = yB;
+    public Cuboid(Vertex[] vertices) {
+        super(vertices);
     }
 
     @Override
-    public void getArea() {
-        distanceAB = Math.sqrt(Math.pow((xA - xB), 2) + Math.pow((yA - yB), 2));
-        cuboidArea = 6 * 2 * distanceAB;
-        System.out.print("Cuboid area = " + String.format("%.2f%n", cuboidArea));
+    public double getArea() {
+        cuboidArea = 6 * Math.pow(distance(getVertices()[0], getVertices()[1]), 2);
+        return cuboidArea;
     }
 
     @Override
-    public void getVolume() {
-        cuboidVolume = Math.pow(distanceAB, 3);
-        System.out.println("Cuboid volume = " + String.format("%.2f%n", cuboidVolume));
+    public double getVolume() {
+        cuboidVolume = Math.pow(distance(getVertices()[0], getVertices()[1]), 3);
+        return cuboidVolume;
+    }
+
+    @Override
+    public String toString() {
+        return "Cuboid{" + " A: " + getVertices()[0].toString() + " B: " + getVertices()[1].toString() +
+                " cuboidArea=" + String.format("%.2f", cuboidArea) +
+                ", cuboidVolume=" + String.format("%.2f", cuboidVolume) +
+                '}';
     }
 }

@@ -2,34 +2,32 @@ package com.company;
 
 public class Triangle extends PlaneShape {
 
-    int xA, xB, xC, yA, yB, yC;
-    double distanceAB, distanceBC, distanceCA;
-    double trianglePerimeter, triangleArea;
+    private double trianglePerimeter, triangleArea;
 
-    public Triangle(int xA, int xB, int xC, int yA, int yB, int yC) {
-        this.xA = xA;
-        this.xB = xB;
-        this.xC = xC;
-        this.yA = yA;
-        this.yB = yB;
-        this.yC = yC;
+    public Triangle(Vertex[] vertices) {
+        super(vertices);
     }
 
     @Override
-    public void getPerimeter() {
-        distanceAB = Math.sqrt(Math.pow((xA - xB), 2) + Math.pow((yA - yB), 2));
-        distanceBC = Math.sqrt(Math.pow((xB - xC), 2) + Math.pow((yB - yC), 2));
-        distanceCA = Math.sqrt(Math.pow((xC - xA), 2) + Math.pow((yC - yA), 2));
-        trianglePerimeter = distanceAB + distanceBC + distanceCA;
-
-        System.out.println("Triangle: " + "AB = " + String.format("%.2f", distanceAB) + ", BC = " + String.format("%.2f", distanceBC) + ", CA = " + String.format("%.2f", distanceCA));
-        System.out.printf("Triangle perimeter = " + "%.2f%n", trianglePerimeter);
+    public double getPerimeter() {
+        trianglePerimeter = (distance(getVertices()[0], getVertices()[1]) + distance(getVertices()[1], getVertices()[2]) + distance(getVertices()[2], getVertices()[0]));
+        return trianglePerimeter;
     }
 
     @Override
-    public void getArea() {
+    public double getArea() {
         double p = (trianglePerimeter / 2);
-        triangleArea = Math.sqrt(p * (p - distanceAB) * (p - distanceBC) * (p - distanceCA));
-        System.out.println("Triangle area = " + String.format("%.2f%n", triangleArea));
+        triangleArea = Math.sqrt(p * (p - (distance(getVertices()[0], getVertices()[1]))) *
+                (p - (distance(getVertices()[1], getVertices()[2]))) * (p - (distance(getVertices()[2], getVertices()[0]))));
+        return triangleArea;
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle{" + " A: " + getVertices()[0].toString() + " B: " + getVertices()[1].toString() +
+                " C: " + getVertices()[2].toString() +
+                " trianglePerimeter=" + String.format("%.2f", trianglePerimeter) +
+                ", triangleArea=" + triangleArea +
+                '}';
     }
 }
